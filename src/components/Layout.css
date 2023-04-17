@@ -1,0 +1,28 @@
+nav > ul {
+    list-style-type: none;
+    margin: 2px;
+    padding: 3px;
+    background-color: #333;
+}
+
+nav > ul li {
+    display: inline-block;
+    padding: 0px 3em;
+
+}
+
+nav > ul li:hover {
+    background-color: #000;
+}
+
+nav > li.selected {
+    background-color: #5b5;
+}
+
+
+nav > ul li a {
+    color: white;
+    font-size: 3em;
+    font-family: arial;
+    text-decoration: none;
+}
