@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid';
 import Item from './Item'
 import { useTeamStore } from '../store/TeamStore'
+import configuration from './config.json'
 
 interface ICheckListItem {
     index: number
@@ -44,14 +45,14 @@ function Survey() {
             id: uuidv4(),
             created: new Date(),
             teamId: selectedTeam.id,
-            items: Object.entries(form).map( ([key, value]): ICheckListItem =>   {
+            items: Object.entries(form).map( ([key, value]): ICheckListItem => {
                 return { 
                     index: Number(key), 
                     key: checklist[Number(key)],
                     value: value
                 }})
         };
-        const response = await fetch('https://jacob-team-check.azurewebsites.net/api/performance-checklists', {
+        const response = await fetch(`${configuration.API_URL}performance-checklists`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json;charset=UTF-8',
@@ -66,7 +67,7 @@ function Survey() {
         <>
             <ul>
                 {checklist && checklist.map((row: string, index: number) => (
-                 <Item key={index} item={{index: index, text: row}} callback={handleCallback} />   
+                 <Item key={index} text={row} callback={handleCallback} />   
                 ))}
             </ul>
             {isComplete && (

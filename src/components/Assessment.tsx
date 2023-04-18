@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useTeamStore } from "../store/TeamStore"
+import configuration from "./config.json"
 
 function Assessment() {
     
@@ -27,7 +28,7 @@ function Assessment() {
     const selectedTeam = useTeamStore(state => state.team);
 
     async function fetchAssessment() : Promise<void> {
-        const response = await fetch(`https://jacob-team-check.azurewebsites.net/api/team-assessments?teamId=${selectedTeam.id}`)
+        const response = await fetch(`${configuration.API_URL}team-assessments?teamId=${selectedTeam.id}`)
         const data : IAssessment = await response.json();
         setAssessment(data);
     }
