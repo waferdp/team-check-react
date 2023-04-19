@@ -15,12 +15,12 @@ const Layout = () => {
         <Container>
           <Navbar.Brand href="/">Team Assessment</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="team">{team.id ? team.name : "Team"}</Nav.Link>
+            <Nav.Link as={Link} to="/">Home</Nav.Link>
+            <Nav.Link as={Link} to="team">{team.id ? team.name : "Team"}</Nav.Link>
             {team.id && (
               <>
-                <Nav.Link href="/survey">Survey</Nav.Link>
-                <Nav.Link href="/assessment">Assessment</Nav.Link>
+                <Nav.Link as={Link} to="survey">Survey</Nav.Link>
+                <Nav.Link as={Link} to="assessment">Assessment</Nav.Link>
               </>
             )}
           </Nav>

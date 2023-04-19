@@ -16,16 +16,20 @@ function Team() {
   const updateTeam = useTeamStore(state => state.updateTeam);
   //const [selectedTeam, setSelectedTeam] = useState<TeamType>({ id: "", name: "" });
 
-  const fetchData = async () => {
+  async function fetchData(): Promise<void> {
     setLoading(true);
+    console.log("Start loading");
     try {
       const response = await fetch(`${configuration.API_URL}teams`);
       const teams = await response.json();
-      setLoading(false);
       setTeams(teams);
     }
     catch (error) {
       console.error(`An error occured retrieving data from backend: ${error}`)
+    }
+    finally {
+      console.log("Finished loading");
+      setLoading(false);
     }
   }
 
