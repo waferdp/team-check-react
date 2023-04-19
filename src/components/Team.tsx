@@ -18,12 +18,10 @@ function Team() {
 
   const fetchData = async () => {
     setLoading(true);
-    console.log("Loading")
     try {
       const response = await fetch(`${configuration.API_URL}teams`);
       const teams = await response.json();
       setLoading(false);
-      console.log("Stopped loading")
       setTeams(teams);
     }
     catch (error) {

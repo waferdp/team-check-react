@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Item from './Item'
 import { useTeamStore } from '../store/TeamStore'
 import configuration from './config.json'
+import { ListGroup } from 'react-bootstrap';
 
 interface ICheckListItem {
     index: number
@@ -32,6 +33,7 @@ function Survey() {
     
     function handleCallback(key: number, value: number, target: any) {
         form[key] = value;
+        console.log(`${key}: ${value}`)
         setForm(form);
         setIsComplete((Object.keys(form).length === checklist.length));
     }
@@ -60,16 +62,15 @@ function Survey() {
               body: JSON.stringify(surveyData)
         });
         const data = await response.json()
-        console.log(data);
     }
 
     return (
         <>
-            <ul>
-                {checklist && checklist.map((row: string, index: number) => (
-                 <Item key={index} text={row} callback={handleCallback} />   
+            <ListGroup>
+                {checklist && checklist.map((element: string, index: number) => (
+                    <Item key={index} index={index} text={element} callback={handleCallback} />   
                 ))}
-            </ul>
+            </ListGroup>
             {isComplete && (
                 <button type="submit" onClick={submitForm}>Submit</button>
             )}
